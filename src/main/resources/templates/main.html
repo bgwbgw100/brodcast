@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인터넷 방송 시청자수</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital@1&display=swap" rel="stylesheet">
+    
+<style>
+header{
+    margin: 0px;
+    font-size: 48px;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Rubik Doodle Shadow';
+    background-color: #D4F0F0;
+}
+body{
+    margin: 0px;
+    min-width: 600px;
+    height:100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+.content{
+    width : 100%;
+    border-top: solid 1px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.left-side, .right-side{
+    width: 200px;
+    flex: 0 0 200px;    
+}
+.content-body{
+    width: calc(100% - 400px);
+    background-color: #eff1f6;
+}
+.platform-tag,.game-tag{
+    display: flex;
+    flex-wrap: wrap;
+}
+.platform, .game{
+    border: solid 1px;
+    padding: 10px;
+    margin:  5px;
+}
+
+.platform:hover,.game:hover {
+    background-color:  #C6DBDA;
+    cursor: pointer;
+}
+.click-color{
+    background-color: #C6DBDA;
+}
+.table-data{
+    height: 180px;
+    width: 200px;
+    padding-left: 5px;
+    position: relative;
+}
+.text-platform{
+    font-size: 28px;
+    text-align: center;
+}
+.twitch{
+    background-color: #CBAACB;
+}
+.africa{
+    background-color: #ABDEE6;
+}
+.detail-text{
+    font-size: 16px;
+}
+.master-text{
+    width: 100%;
+    font-size: 24px;
+}
+.content-table{
+    
+    display: flex;
+    flex-wrap: wrap;
+}
+.text-ellipsis {
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.title-ellipsis {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; /* 표시할 줄 수 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.text-ellipsis:hover,.title-ellipsis:hover {
+  overflow: visible;
+  white-space: normal;
+  
+}
+.right-bottom {
+  position: absolute; 
+  right: 0;
+  bottom: 0;
+}
+.tag-text{
+    text-align: center;
+    padding: 10px;
+    width: 100px;
+}
+.font-text{
+    font-family: 'Merriweather', serif;
+}
+.space{
+    height: 30px;;
+}
+</style>
+
+</head>
+<body>
+    <header>Internet Broadcast</header>
+    <div class="content">
+        <div class="left-side">
+        </div>
+        <div class="content-body"> 
+            <div class="space"></div>
+            <div class="platform-tag font-text">
+                <div class="tag-text"> PLAT FORM</div>
+                <div class="platform">
+                    ALL
+                </div>
+                <div class="platform">
+                    Africa
+                </div>
+                <div class="platform">
+                    Twitch
+                </div>
+            </div>
+            <div class="game-tag font-text">
+                <div class="tag-text">GAME</div>
+                <div class="game">ALL</div>
+                <div class="game">Lost Ark</div>
+                <div class="game">LOL </div>
+                <div class="game">TFT</div>
+                <div class="game">JustChating</div>
+            </div>
+            <div class="space">
+            </div>
+
+            <div class="content-table"> 
+                <div class="table-data">
+                        <div class="table-platform">
+                            <div class="text-platform twitch">
+                                Twitch
+                            </div>
+                        </div>
+                        <div class="table-detail">
+                            <div class="master-text text-ellipsis">
+                            뜨뜨뜨뜨뜨뜨뜨뜨뜨뜨
+                            </div>
+                            <div class="title-text"> </div>
+                            <div class = "detail-text right-bottom">시청자수</div> 
+                        </div>
+                </div>
+                <div class="table-data">
+                    <div class="table-platform">
+                        <div class="text-platform twitch">
+                            Twitch
+                        </div>
+                    </div>
+                    <div class="table-detail">
+                        <div class="master-text text-ellipsis">
+                        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa a
+                        </div>
+                        <div class="title-text title-ellipsis"> <b>강조😊강조😊강조😊강조😊강조😊강조😊강조😊강조😊강조😊강조😊강조😊강조😊강조😊강조😊강조😊강조😊강조😊</b></div>
+                        <div class = "detail-text right-bottom"><div>아이디</div><div>시청자수 : 4000명</div></div> 
+                    </div>
+                </div>
+                <div class="table-data">
+                    <div class="table-platform">
+                        <div class="text-platform africa">
+                            Africa
+                        </div>
+                    </div>
+                    <div class="table-detail">
+                        <div class="master-text text-ellipsis">
+                        뜨뜨뜨뜨뜨뜨뜨뜨뜨뜨
+                        </div>
+                        <div class="title-text"> </div>
+                        <div class = "detail-text right-bottom">시청자수</div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right-side">
+           
+        </div>
+    </div>
+</body>
+
+<script>
+    
+    window.onload = ()=>{
+    
+        document.querySelectorAll(".platform").forEach(element => {
+            element.addEventListener("click",fn_platfrom_tag_click);
+        });
+
+        document.querySelectorAll(".game").forEach(element => {
+            element.addEventListener("click",fn_game_tag_click);
+        });
+    
+    };
+
+    const fn_platfrom_tag_click = ()=>{
+        const currentTarget = event.currentTarget;
+
+        let tags = document.querySelectorAll(".platform");
+
+        for (const tag of tags) {
+            tag.classList.remove("click-color")
+        }
+        currentTarget.classList.add("click-color");
+    }
+
+    const fn_game_tag_click = ()=>{
+        const currentTarget = event.currentTarget;
+
+        let tags = document.querySelectorAll(".game");
+
+        for (const tag of tags) {
+            tag.classList.remove("click-color")
+        }
+        currentTarget.classList.add("click-color");
+    }
+
+
+</script>
+
+</html>
