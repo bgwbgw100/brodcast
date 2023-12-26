@@ -15,5 +15,9 @@ public class BroadcastService {
         return brodcastRepository.findAll();
     }
 
+    public void   temp(){
+        brodcastRepository.temp();
+
+    }
 
 }

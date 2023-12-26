@@ -53,6 +53,9 @@ body{
     background-color:  #C6DBDA;
     cursor: pointer;
 }
+.table-data:hover {
+    cursor: pointer;
+}
 .click-color{
     background-color: #C6DBDA;
 }
@@ -119,7 +122,6 @@ body{
     height: 30px;;
 }
 </style>
-
 </head>
 <body>
     <header>Internet Broadcast</header>
@@ -207,10 +209,14 @@ body{
     let broadListAfrica;
     let broadListTwitch;
 
+    const broadUrl = { africa : "https://play.afreecatv.com/"
+                       ,twitch : "https://www.twitch.tv/"
+    }
+
     window.onload = ()=>{
-    
+        document.querySelector(".content-table").innerHTML="";
         document.querySelectorAll(".platform").forEach(element => {
-            element.addEventListener("click",fn_platfrom_tag_click);
+            element.addEventListener("click",fn_platform_tag_click);
         });
 
         document.querySelectorAll(".game").forEach(element => {
@@ -221,7 +227,7 @@ body{
 
     };
 
-    const fn_platfrom_tag_click = function(){
+    const fn_platform_tag_click = function(){
         const currentTarget = this;
 
         let tags = document.querySelectorAll(".platform");
@@ -243,6 +249,8 @@ body{
         currentTarget.classList.add("click-color");
     }
 
+
+
     const fn_get_broad_list = ()=>{
         return  fetch("list").then(response => {
             return response.json();
@@ -254,9 +262,59 @@ body{
         broadListAfrica = broadList.filter(detail=> detail.platForm === "africa" );
         broadListTwitch = broadList.filter(detail=> detail.platForm === "twitch" );
         fn_broad_list_sort(broadListAll,broadListAfrica,broadListTwitch);
+        fn_make_list(broadListAll);
+        fn_broad_tag_event();
     }
     const fn_broad_list_sort = (...broadListArr) =>{
         broadListArr.forEach(broadList => broadList.sort( (a,b) =>  b.views -a.views  ))
+    }
+
+    const fn_make_list = (broadList)=>{
+        let tag = "";
+        for (let i = 0; i < 30; i++) {
+            tag += `<div class="table-data">
+                        <div class="table-platform">
+                            <div class="text-platform ${fn_escape(broadList[i].platForm)}">
+                                ${fn_escape(broadList[i].platForm)}
+                            </div>
+                        </div>
+                        <div class="table-detail">
+                            <div class="master-text text-ellipsis">
+                                ${fn_escape(broadList[i].name)}
+                            </div>
+                            <div class="title-text title-ellipsis">
+                                <b>
+                                    ${fn_escape(broadList[i].title)}
+                                </b>
+                            </div>
+                            <div class = "detail-text right-bottom">
+                                 <div>아이디 : <span class = "user">${fn_escape(broadList[i].userId)}</span> </div>
+                                 <div>시청자수 : ${broadList[i].views}명</div>
+                            </div>
+                        </div>
+                    </div>`;
+        }
+        let content = document.querySelector(".content-table");
+        content.insertAdjacentHTML("beforeend", tag);
+    }
+    const fn_escape = (str)=>{
+        return str.replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
+    const fn_broad_tag_event = function (){
+        document.querySelectorAll(".table-data").forEach(element =>{
+            element.addEventListener("click",function (){
+                const platForm = this.querySelector(".text-platform").innerText;
+                const userId = this.querySelector(".user").innerText;
+                window.open(broadUrl[platForm] + userId);
+            })
+        })
+
+
     }
 
 
