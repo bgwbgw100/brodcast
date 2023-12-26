@@ -72,7 +72,7 @@ body{
 .twitch{
     background-color: #CBAACB;
 }
-.africa{
+.afreeca{
     background-color: #ABDEE6;
 }
 .detail-text{
@@ -132,11 +132,11 @@ body{
             <div class="space"></div>
             <div class="platform-tag font-text">
                 <div class="tag-text"> PLAT FORM</div>
-                <div class="platform">
+                <div class="platform click-color">
                     ALL
                 </div>
                 <div class="platform">
-                    Africa
+                    Afreeca
                 </div>
                 <div class="platform">
                     Twitch
@@ -144,11 +144,12 @@ body{
             </div>
             <div class="game-tag font-text">
                 <div class="tag-text">GAME</div>
-                <div class="game">ALL</div>
+                <div class="game click-color">ALL</div>
                 <div class="game">Lost Ark</div>
-                <div class="game">LOL </div>
+                <div class="game">LoL</div>
                 <div class="game">TFT</div>
                 <div class="game">JustChating</div>
+                <div class="game">스타</div>
             </div>
             <div class="space">
             </div>
@@ -184,8 +185,8 @@ body{
                 </div>
                 <div class="table-data">
                     <div class="table-platform">
-                        <div class="text-platform africa">
-                            Africa
+                        <div class="text-platform afreeca">
+                            Afreeca
                         </div>
                     </div>
                     <div class="table-detail">
@@ -206,10 +207,12 @@ body{
 
 <script>
     let broadListAll;
-    let broadListAfrica;
+    let broadListAfreeca;
     let broadListTwitch;
+    let broadListCopy;
+    let listIdx =0;
 
-    const broadUrl = { africa : "https://play.afreecatv.com/"
+    const broadUrl = { afreeca : "https://play.afreecatv.com/"
                        ,twitch : "https://www.twitch.tv/"
     }
 
@@ -229,24 +232,82 @@ body{
 
     const fn_platform_tag_click = function(){
         const currentTarget = this;
-
         let tags = document.querySelectorAll(".platform");
+        let isClassName = false;
+
+        this.classList.forEach(className =>{
+            isClassName = className === "click-color" ? true  : isClassName;
+        })
+
+        if (isClassName) return;
 
         for (const tag of tags) {
             tag.classList.remove("click-color")
         }
         currentTarget.classList.add("click-color");
+
+        let platFormStr =  this.innerText.toLowerCase();
+
+        broadListCopy = platFormStr === "all" ? broadListAll.slice() : null;
+        broadListCopy = platFormStr === "afreeca" ? broadListAfreeca.slice() : broadListCopy;
+        broadListCopy = platFormStr === "twitch" ? broadListTwitch.slice() : broadListCopy;
+
+
+        let tagStr = document.querySelector(".game-tag").querySelector(".click-color").innerText.toLowerCase();
+        broadListCopy = broadListCopy.filter( broadObj =>{
+            if(tagStr === "all"){
+                return true;
+            }
+            return  broadObj.tag.toLowerCase() === tagStr;
+        }).slice();
+
+        document.querySelector(".content-table").innerHTML="";
+        listIdx = 0;
+
+        fn_make_list(broadListCopy);
+        fn_broad_tag_event();
+
+
+
+
     }
 
     const fn_game_tag_click = function(){
         const currentTarget = this;
-
         let tags = document.querySelectorAll(".game");
+        let isClassName = false;
+
+        this.classList.forEach(className =>{
+            isClassName = className === "click-color" ? true  : isClassName;
+        })
+
+        if (isClassName) return;
 
         for (const tag of tags) {
             tag.classList.remove("click-color")
         }
         currentTarget.classList.add("click-color");
+
+        let platFormStr =  document.querySelector(".platform-tag").querySelector(".click-color").innerText.toLowerCase();
+
+        broadListCopy = platFormStr === "all" ? broadListAll.slice() : null;
+        broadListCopy = platFormStr === "afreeca" ? broadListAfreeca.slice() : broadListCopy;
+        broadListCopy = platFormStr === "twitch" ? broadListTwitch.slice() : broadListCopy;
+
+
+        let tagStr = this.innerText.toLowerCase();
+        broadListCopy = broadListCopy.filter( broadObj =>{
+            if(tagStr === "all"){
+                return true;
+            }
+            return  broadObj.tag.toLowerCase() === tagStr;
+        }).slice();
+
+        document.querySelector(".content-table").innerHTML="";
+        listIdx = 0;
+
+        fn_make_list(broadListCopy);
+        fn_broad_tag_event();
     }
 
 
@@ -259,10 +320,12 @@ body{
     const fn_set_broad_list = async ()=>{
         const broadList = await fn_get_broad_list();
         broadListAll = broadList;
-        broadListAfrica = broadList.filter(detail=> detail.platForm === "africa" );
+        broadListAfreeca = broadList.filter(detail=> detail.platForm === "afreeca" );
         broadListTwitch = broadList.filter(detail=> detail.platForm === "twitch" );
-        fn_broad_list_sort(broadListAll,broadListAfrica,broadListTwitch);
-        fn_make_list(broadListAll);
+        fn_broad_list_sort(broadListAll,broadListAfreeca,broadListTwitch);
+
+        broadListCopy = broadListAll.slice();
+        fn_make_list(broadListCopy);
         fn_broad_tag_event();
     }
     const fn_broad_list_sort = (...broadListArr) =>{
@@ -271,25 +334,29 @@ body{
 
     const fn_make_list = (broadList)=>{
         let tag = "";
-        for (let i = 0; i < 30; i++) {
+        for ( listIdx ; listIdx < listIdx+30; listIdx++) {
+            if(broadList[listIdx] === undefined) {
+                listIdx--;
+                break;
+            }
             tag += `<div class="table-data">
                         <div class="table-platform">
-                            <div class="text-platform ${fn_escape(broadList[i].platForm)}">
-                                ${fn_escape(broadList[i].platForm)}
+                            <div class="text-platform ${fn_escape(broadList[listIdx].platForm)}">
+                                ${fn_escape(broadList[listIdx].platForm)}
                             </div>
                         </div>
                         <div class="table-detail">
                             <div class="master-text text-ellipsis">
-                                ${fn_escape(broadList[i].name)}
+                                ${fn_escape(broadList[listIdx].name)}
                             </div>
                             <div class="title-text title-ellipsis">
                                 <b>
-                                    ${fn_escape(broadList[i].title)}
+                                    ${fn_escape(broadList[listIdx].title)}
                                 </b>
                             </div>
                             <div class = "detail-text right-bottom">
-                                 <div>아이디 : <span class = "user">${fn_escape(broadList[i].userId)}</span> </div>
-                                 <div>시청자수 : ${broadList[i].views}명</div>
+                                 <div>아이디 : <span class = "user">${fn_escape(broadList[listIdx].userId)}</span> </div>
+                                 <div>시청자수 : ${broadList[listIdx].views}명</div>
                             </div>
                         </div>
                     </div>`;
@@ -313,8 +380,6 @@ body{
                 window.open(broadUrl[platForm] + userId);
             })
         })
-
-
     }
 
 
