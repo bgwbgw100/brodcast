@@ -5,25 +5,22 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class BrodcastScheduled {
+public class BroadcastScheduled {
 
-    private final BrodcastService brodcastService;
+    private final BroadcastService brodcastService;
 
     @Scheduled(fixedRate = 60000)
     public void getBrodCastDTO(){
         log.info("스케줄러실행");
-        List<BrodcastDTO> newResource = brodcastService.getBrodCastList();
-        BrodcastResource.getResource().clear();
-        BrodcastResource.setResource(newResource);
+        List<BroadcastDTO> newResource = brodcastService.getBrodCastList();
+        BroadcastResource.setResource(newResource);
 
-        newResource.forEach(brodcastDTO -> log.info(brodcastDTO.toString()));
     }
 
 }

@@ -9,11 +9,12 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class BrodcastDTO {
+public class BroadcastDTO {
     String platForm;
     String userId;
     String name;
     String title;
     int views;
     Date updateDt;
+    String tag;
 }

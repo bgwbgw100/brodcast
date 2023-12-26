@@ -7,10 +7,10 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class BrodcastService {
-    private final BrodcastRepository brodcastRepository;
+public class BroadcastService {
+    private final BroadcastRepository brodcastRepository;
 
-    public List<BrodcastDTO> getBrodCastList(){
+    public List<BroadcastDTO> getBrodCastList(){
 
         return brodcastRepository.findAll();
     }

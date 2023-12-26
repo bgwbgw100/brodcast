@@ -203,7 +203,10 @@ body{
 </body>
 
 <script>
-    
+    let broadListAll;
+    let broadListAfrica;
+    let broadListTwitch;
+
     window.onload = ()=>{
     
         document.querySelectorAll(".platform").forEach(element => {
@@ -213,11 +216,13 @@ body{
         document.querySelectorAll(".game").forEach(element => {
             element.addEventListener("click",fn_game_tag_click);
         });
-    
+
+        fn_set_broad_list();
+
     };
 
-    const fn_platfrom_tag_click = ()=>{
-        const currentTarget = event.currentTarget;
+    const fn_platfrom_tag_click = function(){
+        const currentTarget = this;
 
         let tags = document.querySelectorAll(".platform");
 
@@ -227,8 +232,8 @@ body{
         currentTarget.classList.add("click-color");
     }
 
-    const fn_game_tag_click = ()=>{
-        const currentTarget = event.currentTarget;
+    const fn_game_tag_click = function(){
+        const currentTarget = this;
 
         let tags = document.querySelectorAll(".game");
 
@@ -237,6 +242,23 @@ body{
         }
         currentTarget.classList.add("click-color");
     }
+
+    const fn_get_broad_list = ()=>{
+        return  fetch("list").then(response => {
+            return response.json();
+        });
+    }
+    const fn_set_broad_list = async ()=>{
+        const broadList = await fn_get_broad_list();
+        broadListAll = broadList;
+        broadListAfrica = broadList.filter(detail=> detail.platForm === "africa" );
+        broadListTwitch = broadList.filter(detail=> detail.platForm === "twitch" );
+        fn_broad_list_sort(broadListAll,broadListAfrica,broadListTwitch);
+    }
+    const fn_broad_list_sort = (...broadListArr) =>{
+        broadListArr.forEach(broadList => broadList.sort( (a,b) =>  b.views -a.views  ))
+    }
+
 
 
 </script>
