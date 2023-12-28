@@ -144,12 +144,16 @@ body{
             </div>
             <div class="game-tag font-text">
                 <div class="tag-text">GAME</div>
-                <div class="game click-color">ALL</div>
-                <div class="game">Lost Ark</div>
-                <div class="game">LoL</div>
-                <div class="game">TFT</div>
-                <div class="game">JustChating</div>
-                <div class="game">스타</div>
+                <div class="game click-color" data-tag = "all">ALL</div>
+                <div class="game" data-tag = "로스트아크">Lost Ark</div>
+                <div class="game" data-tag = "LoL">LOL</div>
+                <div class="game" data-tag = "TFT">TFT</div>
+                <div class="game" data-tag = "메이플스토리">Maple</div>
+                <div class="game" data-tag = "라디오">JustChating</div>
+                <div class="game" data-tag = "스타">스타</div>
+                <div class="game" data-tag = "마인크래프트">마인크래프트</div>
+                <div class="game" data-tag = "배틀그라운드">배틀그라운드</div>
+                <div class="game" data-tag = "이터널 리턴">이터널 리턴</div>
             </div>
             <div class="space">
             </div>
@@ -253,7 +257,7 @@ body{
         broadListCopy = platFormStr === "twitch" ? broadListTwitch.slice() : broadListCopy;
 
 
-        let tagStr = document.querySelector(".game-tag").querySelector(".click-color").innerText.toLowerCase();
+        let tagStr = document.querySelector(".game-tag").querySelector(".click-color").dataset.tag.toLowerCase();
         broadListCopy = broadListCopy.filter( broadObj =>{
             if(tagStr === "all"){
                 return true;
@@ -266,9 +270,6 @@ body{
 
         fn_make_list(broadListCopy);
         fn_broad_tag_event();
-
-
-
 
     }
 
@@ -295,7 +296,7 @@ body{
         broadListCopy = platFormStr === "twitch" ? broadListTwitch.slice() : broadListCopy;
 
 
-        let tagStr = this.innerText.toLowerCase();
+        let tagStr = this.dataset.tag.toLowerCase();
         broadListCopy = broadListCopy.filter( broadObj =>{
             if(tagStr === "all"){
                 return true;
