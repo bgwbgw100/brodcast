@@ -229,10 +229,33 @@ body{
         document.querySelectorAll(".game").forEach(element => {
             element.addEventListener("click",fn_game_tag_click);
         });
-
         fn_set_broad_list();
-
+        fn_scroll_event();
     };
+
+    const fn_scroll_event = ()=>{
+        window.addEventListener('scroll', function() {
+            // 문서의 전체 높이
+            var documentHeight = document.documentElement.scrollHeight;
+
+            // 현재 스크롤 위치 (창의 높이와 현재 스크롤 위치를 더한 값)
+            var currentScroll = window.innerHeight + window.scrollY;
+
+            // 스크롤 위치가 전체 높이의 90%를 넘었는지 확인
+            if (currentScroll / documentHeight > 0.9) {
+                fn_more_list();
+                console.log("실행");
+            }
+        });
+
+    }
+
+    const fn_more_list = function (){
+
+        fn_make_list(fn_get_broad_list_filter());
+
+    }
+
 
     /**
      * 플랫폼 태그 클릭시 이벤트
@@ -262,7 +285,13 @@ body{
         fn_make_list(broadListCopy);
         fn_broad_tag_event();
 
+        // 스크롤 이벤트 리스너 추가
+
+
     }
+
+
+
 
     /**
      * 게임 태그 클릭시 이벤트
@@ -345,7 +374,6 @@ body{
 
         for ( listIdx ; listIdx < idx; listIdx++) {
             if(broadList[listIdx] === undefined) {
-                listIdx--;
                 break;
             }
             tag += `<div class="table-data">
