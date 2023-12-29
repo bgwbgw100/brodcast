@@ -234,6 +234,10 @@ body{
 
     };
 
+    /**
+     * 플랫폼 태그 클릭시 이벤트
+     * 보이는 List 변경
+     */
     const fn_platform_tag_click = function(){
         const currentTarget = this;
         let tags = document.querySelectorAll(".platform");
@@ -250,20 +254,7 @@ body{
         }
         currentTarget.classList.add("click-color");
 
-        let platFormStr =  this.innerText.toLowerCase();
-
-        broadListCopy = platFormStr === "all" ? broadListAll.slice() : null;
-        broadListCopy = platFormStr === "afreeca" ? broadListAfreeca.slice() : broadListCopy;
-        broadListCopy = platFormStr === "twitch" ? broadListTwitch.slice() : broadListCopy;
-
-
-        let tagStr = document.querySelector(".game-tag").querySelector(".click-color").dataset.tag.toLowerCase();
-        broadListCopy = broadListCopy.filter( broadObj =>{
-            if(tagStr === "all"){
-                return true;
-            }
-            return  broadObj.tag.toLowerCase() === tagStr;
-        }).slice();
+        broadListCopy = fn_get_broad_list_filter();
 
         document.querySelector(".content-table").innerHTML="";
         listIdx = 0;
@@ -273,6 +264,10 @@ body{
 
     }
 
+    /**
+     * 게임 태그 클릭시 이벤트
+     * 보이는 List 변경
+     */
     const fn_game_tag_click = function(){
         const currentTarget = this;
         let tags = document.querySelectorAll(".game");
@@ -289,20 +284,7 @@ body{
         }
         currentTarget.classList.add("click-color");
 
-        let platFormStr =  document.querySelector(".platform-tag").querySelector(".click-color").innerText.toLowerCase();
-
-        broadListCopy = platFormStr === "all" ? broadListAll.slice() : null;
-        broadListCopy = platFormStr === "afreeca" ? broadListAfreeca.slice() : broadListCopy;
-        broadListCopy = platFormStr === "twitch" ? broadListTwitch.slice() : broadListCopy;
-
-
-        let tagStr = this.dataset.tag.toLowerCase();
-        broadListCopy = broadListCopy.filter( broadObj =>{
-            if(tagStr === "all"){
-                return true;
-            }
-            return  broadObj.tag.toLowerCase() === tagStr;
-        }).slice();
+        broadListCopy = fn_get_broad_list_filter();
 
         document.querySelector(".content-table").innerHTML="";
         listIdx = 0;
@@ -311,8 +293,32 @@ body{
         fn_broad_tag_event();
     }
 
+    /**
+     * 태그에 맞춰 방송 목록을 filter 처리
+     * @returns {Array}
+     */
+    const fn_get_broad_list_filter = ()=>{
+        let platFormStr =  document.querySelector(".platform-tag").querySelector(".click-color").innerText.toLowerCase();
+
+        broadListCopy = platFormStr === "all" ? broadListAll.slice() : null;
+        broadListCopy = platFormStr === "afreeca" ? broadListAfreeca.slice() : broadListCopy;
+        broadListCopy = platFormStr === "twitch" ? broadListTwitch.slice() : broadListCopy;
 
 
+        let tagStr = document.querySelector(".game-tag").querySelector(".click-color").dataset.tag.toLowerCase();
+        return broadListCopy.filter( broadObj =>{
+            if(tagStr === "all"){
+                return true;
+            }
+            return  broadObj.tag.toLowerCase() === tagStr;
+        }).slice();
+
+    }
+
+    /**
+     * 서버에서 방송 리스트를 받아옴
+     * @returns {Promise<any>}
+     */
     const fn_get_broad_list = ()=>{
         return  fetch("list").then(response => {
             return response.json();
@@ -335,7 +341,9 @@ body{
 
     const fn_make_list = (broadList)=>{
         let tag = "";
-        for ( listIdx ; listIdx < listIdx+30; listIdx++) {
+        let idx = listIdx + 30;
+
+        for ( listIdx ; listIdx < idx; listIdx++) {
             if(broadList[listIdx] === undefined) {
                 listIdx--;
                 break;
