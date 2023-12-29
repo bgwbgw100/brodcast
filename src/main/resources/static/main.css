@@ -1,0 +1,111 @@
+header{
+    margin: 0px;
+    font-size: 48px;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Rubik Doodle Shadow';
+    background-color: #D4F0F0;
+}
+body{
+    margin: 0px;
+    min-width: 600px;
+    height:100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+.content{
+    width : 100%;
+    border-top: solid 1px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.left-side, .right-side{
+    width: 200px;
+    flex: 0 0 200px;
+}
+.content-body{
+    width: calc(100% - 400px);
+    background-color: #eff1f6;
+}
+.platform-tag,.game-tag{
+    display: flex;
+    flex-wrap: wrap;
+}
+.platform, .game{
+    border: solid 1px;
+    padding: 10px;
+    margin:  5px;
+}
+
+.platform:hover,.game:hover {
+    background-color:  #C6DBDA;
+    cursor: pointer;
+}
+.table-data:hover {
+    cursor: pointer;
+}
+.click-color{
+    background-color: #C6DBDA;
+}
+.table-data{
+    height: 180px;
+    width: 200px;
+    padding-left: 5px;
+    position: relative;
+}
+.text-platform{
+    font-size: 28px;
+    text-align: center;
+}
+.twitch{
+    background-color: #CBAACB;
+}
+.afreeca{
+    background-color: #ABDEE6;
+}
+.detail-text{
+    font-size: 16px;
+}
+.master-text{
+    width: 100%;
+    font-size: 24px;
+}
+.content-table{
+
+    display: flex;
+    flex-wrap: wrap;
+}
+.text-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.title-ellipsis {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; /* 표시할 줄 수 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.text-ellipsis:hover,.title-ellipsis:hover {
+    overflow: visible;
+    white-space: normal;
+
+}
+.right-bottom {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.tag-text{
+    text-align: center;
+    padding: 10px;
+    width: 100px;
+}
+.font-text{
+    font-family: 'Merriweather', serif;
+}
+.space{
+    height: 30px;;
+}
