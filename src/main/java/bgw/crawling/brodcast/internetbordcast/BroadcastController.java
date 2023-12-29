@@ -15,6 +15,11 @@ public class BroadcastController {
     @GetMapping("main")
     public void main(){
     }
+    @GetMapping("")
+    public String index(){
+        return "main";
+    }
+
     @GetMapping("list")
     @ResponseBody
     public List<BroadcastDTO> brodcastList (){
