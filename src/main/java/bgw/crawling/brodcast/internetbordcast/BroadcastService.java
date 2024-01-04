@@ -2,21 +2,23 @@ package bgw.crawling.brodcast.internetbordcast;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class BroadcastService {
-    private final BroadcastRepository brodcastRepository;
+    private final BroadcastRepository broadcastRepository;
 
+    @Transactional
     public List<BroadcastDTO> getBrodCastList(){
 
-        return brodcastRepository.findAll();
+        return broadcastRepository.findAll();
     }
 
     public void   temp(){
-        brodcastRepository.temp();
+        broadcastRepository.temp();
 
     }
 
