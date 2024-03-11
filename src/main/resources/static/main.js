@@ -1,11 +1,14 @@
 let broadListAll;
 let broadListAfreeca;
 let broadListTwitch;
+let broadListChzzk
 let broadListCopy;
 let listIdx =0;
 
-const broadUrl = { afreeca : "https://play.afreecatv.com/"
+const broadUrl = {
+    afreeca : "https://play.afreecatv.com/"
     ,twitch : "https://www.twitch.tv/"
+    ,chzzk : "https://chzzk.naver.com/"
 }
 
 window.onload = ()=>{
@@ -21,23 +24,23 @@ window.onload = ()=>{
     fn_scroll_event();
 };
 
-const fn_scroll_event = ()=>{
-    window.addEventListener('scroll', function() {
-        // 문서의 전체 높이
-        var documentHeight = document.documentElement.scrollHeight;
+    const fn_scroll_event = ()=>{
+        window.addEventListener('scroll', function() {
+            // 문서의 전체 높이
+            var documentHeight = document.documentElement.scrollHeight;
 
-        // 현재 스크롤 위치 (창의 높이와 현재 스크롤 위치를 더한 값)
-        var currentScroll = window.innerHeight + window.scrollY;
+            // 현재 스크롤 위치 (창의 높이와 현재 스크롤 위치를 더한 값)
+            var currentScroll = window.innerHeight + window.scrollY;
 
-        // 스크롤 위치가 전체 높이의 90%를 넘었는지 확인
-        if (currentScroll / documentHeight > 0.9) {
-            fn_more_list();
-        }
-    });
+            // 스크롤 위치가 전체 높이의 90%를 넘었는지 확인
+            if (currentScroll / documentHeight > 0.9) {
+                fn_more_list();
+            }
+        });
 
-}
+    }
 
-const fn_more_list = function (){
+    const fn_more_list = function (){
 
     fn_make_list(fn_get_broad_list_filter());
 
@@ -119,6 +122,7 @@ const fn_get_broad_list_filter = ()=>{
     broadListCopy = platFormStr === "all" ? broadListAll.slice() : null;
     broadListCopy = platFormStr === "afreeca" ? broadListAfreeca.slice() : broadListCopy;
     broadListCopy = platFormStr === "twitch" ? broadListTwitch.slice() : broadListCopy;
+    broadListCopy = platFormStr === "chzzk" ? broadListChzzk.slice() : broadListCopy;
 
 
     let tagStr = document.querySelector(".game-tag").querySelector(".click-color").dataset.tag.toLowerCase();
@@ -145,7 +149,8 @@ const fn_set_broad_list = async ()=>{
     broadListAll = broadList;
     broadListAfreeca = broadList.filter(detail=> detail.platForm === "afreeca" );
     broadListTwitch = broadList.filter(detail=> detail.platForm === "twitch" );
-    fn_broad_list_sort(broadListAll,broadListAfreeca,broadListTwitch);
+    broadListChzzk = broadList.filter(detail=> detail.platForm === "chzzk" );
+    fn_broad_list_sort(broadListAll,broadListAfreeca,broadListTwitch,broadListChzzk);
 
     broadListCopy = broadListAll.slice();
     fn_make_list(broadListCopy);
@@ -179,7 +184,7 @@ const fn_make_list = (broadList)=>{
                                 </b>
                             </div>
                             <div class = "detail-text right-bottom">
-                                 <div>아이디 : <span class = "user">${fn_escape(broadList[listIdx].userId)}</span> </div>
+                                 <div class="id-text">아이디 : <span class = "user" >${ fn_escape(broadList[listIdx].userId)}</span> </div>
                                  <div>시청자수 : ${broadList[listIdx].views}명</div>
                             </div>
                         </div>

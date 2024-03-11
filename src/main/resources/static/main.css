@@ -63,6 +63,10 @@ body{
 .afreeca{
     background-color: #ABDEE6;
 }
+.chzzk{
+    background-color: aquamarine;
+}
+
 .detail-text{
     font-size: 16px;
 }
@@ -97,6 +101,7 @@ body{
     position: absolute;
     right: 0;
     bottom: 0;
+    max-width: 200px;
 }
 .tag-text{
     text-align: center;
@@ -108,4 +113,9 @@ body{
 }
 .space{
     height: 30px;;
+}
+.id-text{
+    white-space: nowrap; /* 텍스트를 한 줄로 만듦 */
+    overflow: hidden; /* 초과하는 텍스트를 숨김 */
+    text-overflow: ellipsis; /* 숨겨진 텍스트를 말줄임표로 표시 */
 }
